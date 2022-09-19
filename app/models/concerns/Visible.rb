@@ -14,6 +14,6 @@ module Visible
     end
 
     def archived?
-        status == 'archived'
+        :status == 'archived'
     end
 end

@@ -91,6 +91,8 @@ GEM
     erubi (1.11.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hublot (0.0.6)
+      rails (> 3.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -130,6 +132,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
+    pretty (0.3.2)
     public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -207,6 +210,9 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.1)
+    will_paginate-bootstrap (1.0.2)
+      will_paginate (>= 3.0.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.0)
@@ -218,8 +224,10 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  hublot (~> 0.0.6)
   importmap-rails
   jbuilder
+  pretty (~> 0.3.2)
   puma (~> 5.0)
   rails (~> 7.0.4)
   redis (~> 4.0)
@@ -231,6 +239,8 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webdrivers
+  will_paginate (~> 3.3, >= 3.3.1)
+  will_paginate-bootstrap (~> 1.0, >= 1.0.2)
 
 RUBY VERSION
    ruby 3.0.0p0
