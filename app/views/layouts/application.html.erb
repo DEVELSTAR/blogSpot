@@ -18,12 +18,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-dark">
+  <body class="bg-light">
     <header>
       <%= render 'layouts/navigation' %>
     </header>
     <main role='main'>
       <%= content_for?(:content) ? yield(:content) : yield %>
-    </main>  
+    </main>
   </body>
 </html>

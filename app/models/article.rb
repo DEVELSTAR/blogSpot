@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
     include Visible
-	validates :title, presence: true
+    validates :title, presence: true, length: { maximum: 40, too_long: "may not exceed %{count} characters" }
     validates :body, presence: true, length: { minimum: 10, too_short: "must contain atleast %{count} characters", 
                                                maximum: 500 , too_long: "may not exceed %{count} characters"}
     
@@ -22,6 +22,10 @@ class Article < ApplicationRecord
 
         articles.sort_by(&:id)
         return articles[0..2]
+    end
+    
+    def self.order_by(articles)
+
     end
 
     private

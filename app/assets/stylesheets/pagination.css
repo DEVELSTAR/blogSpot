@@ -13,13 +13,13 @@
 	 padding: 0.1em 0.5em;
 }
  .disabled .page-link {
-	 color: #aaa;
+	 color: #bebebe;
 }
 .active .page-link {
 	 z-index: 3;
 	 font-style: normal;
 	 font-weight: bold;
-	 color: #bebebe;
+	 color: #f1f1f1;
 }
  .custom_pagination a {
 	 border: 1px solid #ddd;

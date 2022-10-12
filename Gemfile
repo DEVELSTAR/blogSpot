@@ -73,5 +73,5 @@ end
 
 gem 'hublot', '~> 0.0.6'
 gem 'will_paginate', '~> 3.3', '>= 3.3.1'
-gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.2'
+gem 'will_paginate-bootstrap-style'
 gem 'pretty', '~> 0.3.2'
