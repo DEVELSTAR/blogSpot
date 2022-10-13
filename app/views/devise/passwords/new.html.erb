@@ -1,0 +1,24 @@
+<%= link_to " Back", :back, :class => "btn btn-primary btn-sm bi bi-box-arrow-left", :style => "margin-top: .7em; font-size: 1.3rem" %>
+
+<div class="card shadow">
+  <div class="card-header">
+    <h2 class="my-2 text-dark">Forgot your password?</h2>
+  </div>
+  <div class="card-body">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource, :class => "text-dark" %>
+      
+      <div class="field my-2 text-dark">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="actions my-2 text-dark">
+        <%= f.submit "Send me reset password instructions" %>
+      </div>
+    <% end %>
+    <div class="mb-3">
+    <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

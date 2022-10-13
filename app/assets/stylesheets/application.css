@@ -155,3 +155,19 @@ a.bi-heart {
 a.bi-heart:hover {
    color: #fff
 }
+
+a.bi-heart-fill {
+   color: rgb(184, 3, 3)
+}
+
+a.bi-heart-fill:hover {
+   color: #fff
+}
+
+a.bi-box-arrow-left {
+   color: #222
+}
+
+a.bi-box-arrow-left:hover {
+   color: #fff
+}

@@ -1,0 +1,66 @@
+<%= link_to " Back", :back, :class => "btn btn-primary btn-sm bi bi-box-arrow-left", :style => "margin-top: .7em; font-size: 1.3rem" %>
+
+<div class="card shadow">
+  <div class="card-header">
+    <h2 class="text-dark my-2">Log in</h2>
+  </div>
+  <div class="card-body">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field my-2 text-dark">
+        <%= f.label :username %><br />
+        <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+      </div>
+
+      <div class="field my-2 text-dark">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autocomplete: "email" %>
+      </div>
+
+      <div class="field my-2 text-dark">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field my-2 text-dark">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="actions my-2">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+    <div class="mb-3">
+      <%= render "devise/shared/links" %>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Example Login
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Example Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-dark">
+            <p>To explore the functionality of this site log in with these credentials:</p>
+
+            <p>Username: Jim Browning</p>
+            <p>Email: Example001@email.com</p>
+            <p>Password: Password</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

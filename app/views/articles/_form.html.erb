@@ -6,10 +6,10 @@
     <% end %>
     <div class="container rounded-3 border shadow">
         <br>
-        <div class="text-dark">
-            <%= form.label "Cover Art" %><br>
-            <%= form.file_field :cover %>
-        </div>
+        <%# <div class="text-dark">
+            <%= form.label "Cover Art" ><br>
+            <%= form.file_field :cover, direct_upload: true >
+        </div> %>
         <br>
 
         <div class="d-flex text-dark" style="flex-direction: column">
@@ -36,7 +36,7 @@
                             selected: 'public' %>
         </div>
         <br>
-
+        <%= form.hidden_field :user_id, :value => current_user.id %>
         <div>
             <%= form.submit %>
         </div>

@@ -1,7 +1,22 @@
+<% if article.nil? %>
+<% else %>
 <div class="col-md-8 float-md-start">
-    <% if article.cover.attached? %>
-        <a href="/articles/<%= article.id %>">
-            <img src="<%= url_for(article.cover) %>" class="d-block my-0 w-100 mw-100 rounded-3" style="aspect-ratio: 16/9">
+    <% if article.cover.attached? || article.cover.attached? == false %>
+        <a href="/articles/<%= article.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
+            <% i = rand(0...4) %>
+            <% case i %>
+            <% when i = 0 %>
+                <%= image_tag "art-forest-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
+            <% when i = 1 %>
+                <%= image_tag "car-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
+            <% when i = 2 %>
+                <%= image_tag "city-example.jpeg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
+            <% when i = 3 %>
+                <%= image_tag "forest-example.jpeg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
+            <% when i = 4 %>
+                <%= image_tag "wildfire-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
+            <% end %>
+            <%# <img src="<%= url_for(article.cover) >" class="d-block my-0 w-100 mw-100 rounded-3" style="aspect-ratio: 16/9"> %>
         </a>
     <% else %>
         <p class="text-muted d-block h-100 w-100 text-center">No photo to load...</p>
@@ -12,9 +27,18 @@
         <a href="/articles/<%= article.id %>" class="fs-3 text-decoration-none fw-bolder title-link"><%= article.title.capitalize %></a>
     </div>
     <div class="d-flex my-3">
-        <img src="" class="border border-dark rounded-circle" style="height: 40px; width: 40px; margin: 0; aspect-ratio: 2/2">
+        <% if article.user.nil? %>
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
+        <% else %>
+            <!-- <%# <img src="<%= url_for(article.user.avi) %>" class="border border-dark rounded-circle m-0" style="height: 40px; width: 40px; aspect-ratio: 2/2"> %> -->
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
+        <% end %>
+
         <div class="col-10 ms-3 align-self-center">
-            <p class="text-muted fs-6 mb-0">John Hernandez</p>
+            <a href="/users/<%= article.user.id unless article.user.nil? %>" class="w-auto text-decoration-none text-muted"><%= article.user.username.capitalize if article.user != nil && article.user.username != nil %></a>
         </div>
     </div>
 </div>
+
+<% end %>

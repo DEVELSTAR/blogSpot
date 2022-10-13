@@ -1,7 +1,7 @@
 <%= link_to " Back", home_index_path, :class => "btn btn-primary btn-sm bi bi-box-arrow-left", :style => "margin-top: .7em; font-size: 1.3rem" %>
 <% temp_articles = @articles %>
-<% if @articles.current_page == 1 %>
-  <div class="d-flex justify-content-center">
+<% if @articles.current_page == 1 && @articles != nil %>
+<div class="d-flex justify-content-center">
     <div class="border-bottom">
         <h1 class="text-center text-dark">Most Recent</h1>
     </div>
@@ -15,7 +15,11 @@
 <% temp_articles = temp_articles.drop(1) if @articles.current_page == 1 %>
 <% temp_articles.each do |article| %>
     <div class="row justify-content-center mt-2">
-      <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
+      <% if article.nil? %>
+        <% "No articles to render" %>
+      <% else %>
+        <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
+      <% end %>
     </div>
 <% end %>
 

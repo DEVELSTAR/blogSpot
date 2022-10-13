@@ -1,39 +1,67 @@
 <% if comment.id != nil && comment.subject_id.nil? %>
     <li class="list-group-item row" id="comment<%= comment.id %>">
         <div class="d-flex flex-row align-items-start p-0 mt-1 position-relative">
-            <%= link_to '', [comment.article, comment],
-                        :class => "position-absolute top-0 end-0 btn btn-primary btn-sm btn-danger bi bi-trash",
-                        :style => "font-size: 1rem; height: 28px; width: 27px; padding: 0",
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' } %>
-
-            <img src="" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+            <% if comment.user == current_user %>
+                <%= link_to '', [comment.article, comment],
+                            :class => "position-absolute top-0 end-0 btn btn-primary btn-sm btn-danger bi bi-trash",
+                            :style => "font-size: 1rem; height: 28px; width: 27px; padding: 0",
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' },
+                            :data_bs_toggle =>"tooltip",
+                            :data_bs_placement => "bottom",
+                            :title => "Delete" %>
+            <% end %>
+            <% if comment.user.nil? %>
+                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
+            <% elsif comment.user.avi.attached? || comment.user.avi.attached? == false %>
+                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
+            <% else %>
+                <img src="<%= url_for(comment.user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+            <% end %>
 
             <div class="col-10 flex-column">
                 <div class="h-25 d-flex flex-row mb-0 p-0">
                     <div class="row me-3">
-                        <p class="card-text mb-0 w-auto mw-50 d-flex"><%= comment.commenter %></p>
+                        <a href="/users/<%= comment.user.id unless comment.user.nil? %>" class="w-auto text-decoration-none"><%= comment.user.username.capitalize if comment.user != nil && comment.user.username != nil %></a>
                         <p class="text-muted col-4 mb-0 w-auto mw-50"><%= comment.updated_at.pretty %></p>
                     </div>
                 </div>
-
                 <p class="mb-0 text-black text-opacity-75">
                     <%= comment.body %>
                 </p>
 
-                <p><button class="btn btn-link btn-block text-left text-decoration-none collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">
-                Reply</button></p>
+                <div>
+                    <% if current_user.nil? || comment.liked?(current_user) === false %>
+                        <%= link_to ' ' + comment.likes.count.to_s, like_comment_url(:article_id => comment.article_id, :id => comment.id),
+                                        :class => "btn btn-sm bi bi-hand-thumbs-up",
+                                        :method => :put %> 
+                    <% else %>
+                        <%= link_to ' ' + comment.likes.count.to_s, like_comment_url(:article_id => comment.article_id, :id => comment.id),
+                                        :class => "btn btn-sm bi bi-hand-thumbs-up-fill",
+                                        :method => :put %>
+                    <% end %>
+                    <% if current_user.nil? || comment.disliked?(current_user) === false %>
+                        <%= link_to ' ' + comment.dislikes.count.to_s, dislike_comment_url(:article_id => comment.article_id, :id => comment.id),
+                                        :class => "btn btn-sm bi bi-hand-thumbs-down",
+                                        :method => :put %>
+                    <% else %>
+                        <%= link_to ' ' + comment.dislikes.count.to_s, dislike_comment_url(:article_id => comment.article_id, :id => comment.id),
+                                        :class => "btn btn-sm bi bi-hand-thumbs-down-fill",
+                                        :method => :put %>
+                    <% end %>               
+                    <button class="btn btn-link btn-block text-left text-decoration-none collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">Reply</button>
+                </div>
 
                 <div id="reply<%= comment.id %>" class="collapse" aria-labelledby="comment<%= comment.id %>" data-parent="#commentAccordion">
                     <%= render "comments/replies/form", comment: comment %>
                 </div>
-
                 <% if comment.replies.count != 0 %>
                     <button class="btn btn-link btn-block text-left text-decoration-none collapsed my-1 p-0 bi bi-caret-down-fill" type="button" data-bs-toggle="collapse" data-bs-target="#replies<%= comment.id %>" aria-expanded="false" aria-controls="replies<%= comment.id %>">
                     View <%= Comment.thread_length(comment) %> replies</button>
-
                     <div id="replies<%= comment.id %>" class="collapse" aria-labelledby="comment<%= comment.id %>" data-parent="#commentAccordion">
-    @@ -43,6 +39,6 @@
+                        <% Comment.thread(comment).each do |reply| %>
+                            <%= render( :partial => "comments/replies/reply", :locals => { :comment => reply } ) %>
+                        <% end %>
                     </div>
                 <% end %>
             </div>

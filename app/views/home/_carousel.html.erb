@@ -6,21 +6,19 @@
     </ol>
 
     <div class="carousel-inner rounded-start">
-        <% top_articles = Article.top_three(articles) %>
-
         <div class="carousel-item active">
-            <%= render( :partial => "articles/card2", :locals => { :article => top_articles[0] } ) %>
+            <%= render( :partial => "articles/card2", :locals => { :article => articles[0] } ) %>
         </div>
 
         <div class="carousel-item">
-            <%= render( :partial => "articles/card2", :locals => { :article => top_articles[1] } ) %>
+            <%= render( :partial => "articles/card2", :locals => { :article => articles[1] } ) %>
         </div>
 
         <div class="carousel-item">
-            <%= render( :partial => "articles/card2", :locals => { :article => top_articles[2] } ) %>
+            <%= render( :partial => "articles/card2", :locals => { :article => articles[2] } ) %>
         </div>
     </div>
-
+    
     <a class="carousel-control-prev bg-dark rounded-circle top-50 start-0 translate-middle-y" style="width: 50px; height: 50px; margin-left: 15px" href="#articleCarouselControls" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>

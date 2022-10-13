@@ -1,0 +1,84 @@
+<%= link_to " Back", :back, :class => "btn btn-primary btn-sm bi bi-box-arrow-left", :style => "margin-top: .7em; font-size: 1.3rem" %>
+<div class="card mb-3 shadow border-0 bg-light" style="display: inline-block">
+    <div class="row no-gutters">
+
+        <div class="position-relative">
+            <% if @user == current_user %>
+                <%= link_to " Edit Profile", edit_registration_path(@user),
+                            :class => "btn btn-primary btn-sm bi bi-pencil-square position-absolute end-0 me-2",
+                            :data_bs_toggle =>"tooltip",
+                            :data_bs_placement => "bottom",
+                            :title => "Edit"%>
+            <% end %>
+        </div>
+
+        <div class="col-md-4 p-0 align-items-center d-flex justify-content-center">
+            <% if @user.avi.attached? == false || @user.avi.attached? %>                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-3 me-3", :style => "height: 100px; width: 100px; aspect-ratio: 2/2"%>
+            <% else %>
+                <%= image_tag @user.avi.url, :class => "border border-dark rounded-circle my-3 me-3", :style => "height: 100px; width: 100px; aspect-ratio: 2/2"%>
+            <% end %>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-text" style="color: #222">
+                    <%= @user.username.capitalize %>
+                </h2>
+                <p class="card-text mb-2">
+                    contact: <%= @user.email %>
+                </p>
+                <div class="row d-inline-block mb-3">
+                    <%= link_to "Following: " + @user.follows.count.to_s, user_following_path(@user), :method => :get, :class => "text-decoration-none link-primary" %>
+                    <%= link_to "Followers: " + @user.followers.count.to_s, user_followers_path(@user), :method => :get, :class => "text-decoration-none link-primary" %>
+                </div>
+                <div class="row ms-1">
+                <% if @user != current_user && current_user != nil %>
+                        <% if @user.followed?(current_user) %>
+                            <%= link_to ' Unfollow', unfollow_user_url(:id => @user.id),
+                                    :class => "bi bi-dash btn btn-danger pe-3 w-auto",
+                                    :style => "font-size: 1.3rem; margin-right: 5px",
+                                    :method => :put,
+                                    "data-bs-toggle" => "tooltip",
+                                    "data-bs-placement" =>"bottom",
+                                    :title => "Unfollow" %>
+                        <% else %>
+                            <%= link_to ' Follow', follow_user_url(:id => @user.id),
+                                    :class => "bi bi-plus btn btn-primary pe-3 w-auto",
+                                    :style => "font-size: 1.3rem; margin-right: 5px",
+                                    :method => :put, 
+                                    "data-bs-toggle" => "tooltip",
+                                    "data-bs-placement" =>"bottom",
+                                    :title => "Follow"%>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3 border-0">
+    <% if @user == current_user %>
+        <h2 class="card-header article_header">My Articles:</h2>
+    <% else %>
+        <p><%= @user.username.capitalize %>'s Articles:</p>
+    <% end %>
+    <% @user.articles.each do |article| %>
+        <div class="row justify-content-center mt-2">
+            <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
+        </div>
+    <% end %>
+</div>
+
+<div class="card mb-3 border-0">
+    <% if @user == current_user %>
+        <h2 class="card-header article_header">My Favorites:</h2>
+    <% else %>
+        <p><%= @user.username.capitalize %>'s Favorites:</p>
+    <% end %>
+    
+    <% @user.favorites.each do |favorite| %>
+        <div class="row justify-content-center mt-2">
+            <%= render( :partial => "articles/card", :locals => { :article => favorite } ) %>
+        </div>
+    <% end %>
+</div>
