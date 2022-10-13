@@ -140,15 +140,11 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
-<<<<<<< HEAD
     omniauth (2.1.0)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
     orm_adapter (0.5.0)
-=======
-    pg (1.4.3)
->>>>>>> fe6fb1f71ba1d83d8d4495fa368cd85e63b2b5cb
     pretty (0.3.2)
     public_suffix (5.0.0)
     puma (5.6.5)
@@ -240,10 +236,8 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.0)
-
 PLATFORMS
   x86_64-linux
-
 DEPENDENCIES
   bootsnap
   capybara
@@ -252,11 +246,7 @@ DEPENDENCIES
   hublot (~> 0.0.6)
   importmap-rails
   jbuilder
-<<<<<<< HEAD
   omniauth
-=======
-  pg
->>>>>>> fe6fb1f71ba1d83d8d4495fa368cd85e63b2b5cb
   pretty (~> 0.3.2)
   puma (~> 5.0)
   rails (~> 7.0.4)
@@ -271,9 +261,7 @@ DEPENDENCIES
   webdrivers
   will_paginate (~> 3.3, >= 3.3.1)
   will_paginate-bootstrap-style
-
 RUBY VERSION
    ruby 3.0.0p0
-
 BUNDLED WITH
    2.3.18
