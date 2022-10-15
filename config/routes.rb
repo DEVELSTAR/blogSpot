@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get "/users/:id/followers", to: "users#followers", as: "user_followers"
 
   put "/users/:id/follow", to: 'users#follow', as: 'follow_user'
-  put "/users/:id/unfollow", to: 'users#unfollow', as: 'unfollow_user'
+  delete "/users/:id/unfollow", to: 'users#unfollow', as: 'unfollow_user'
 
   put "/article/:id/favorite", to: 'articles#favorite', as: 'favorite_article'
   delete "/article/:id/unfavorite", to: 'articles#unfavorite', as: 'unfavorite_article'

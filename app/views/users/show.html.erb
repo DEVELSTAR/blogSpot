@@ -36,7 +36,7 @@
                             <%= link_to ' Unfollow', unfollow_user_url(:id => @user.id),
                                     :class => "bi bi-dash btn btn-danger pe-3 w-auto",
                                     :style => "font-size: 1.3rem; margin-right: 5px",
-                                    :method => :put,
+                                    data: {turbo_method: :delete} ,
                                     "data-bs-toggle" => "tooltip",
                                     "data-bs-placement" =>"bottom",
                                     :title => "Unfollow" %>
@@ -44,7 +44,7 @@
                             <%= link_to ' Follow', follow_user_url(:id => @user.id),
                                     :class => "bi bi-plus btn btn-primary pe-3 w-auto",
                                     :style => "font-size: 1.3rem; margin-right: 5px",
-                                    :method => :put, 
+                                    data: {turbo_method: :put} , 
                                     "data-bs-toggle" => "tooltip",
                                     "data-bs-placement" =>"bottom",
                                     :title => "Follow"%>

@@ -33,20 +33,20 @@
                     <% if current_user.nil? || comment.liked?(current_user) === false %>
                         <%= link_to ' ' + comment.likes.count.to_s, like_comment_url(:article_id => comment.article_id, :id => comment.id),
                                         :class => "btn btn-sm bi bi-hand-thumbs-up",
-                                        :method => :put %> 
+                                        data: {turbo_method: :put}  %> 
                     <% else %>
                         <%= link_to ' ' + comment.likes.count.to_s, like_comment_url(:article_id => comment.article_id, :id => comment.id),
                                         :class => "btn btn-sm bi bi-hand-thumbs-up-fill",
-                                        :method => :put %>
+                                        data: {turbo_method: :put}  %>
                     <% end %>
                     <% if current_user.nil? || comment.disliked?(current_user) === false %>
                         <%= link_to ' ' + comment.dislikes.count.to_s, dislike_comment_url(:article_id => comment.article_id, :id => comment.id),
                                         :class => "btn btn-sm bi bi-hand-thumbs-down",
-                                        :method => :put %>
+                                        data: {turbo_method: :put}  %>
                     <% else %>
                         <%= link_to ' ' + comment.dislikes.count.to_s, dislike_comment_url(:article_id => comment.article_id, :id => comment.id),
                                         :class => "btn btn-sm bi bi-hand-thumbs-down-fill",
-                                        :method => :put %>
+                                        data: {turbo_method: :put}  %>
                     <% end %>               
                     <button class="btn btn-link btn-block text-left text-decoration-none collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">Reply</button>
                 </div>

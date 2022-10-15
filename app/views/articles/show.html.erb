@@ -15,6 +15,7 @@
                             :class => "btn btn-primary btn-sm btn-danger bi bi-trash",
                             :style => "font-size: 1.3rem",
                             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+                            :data_bs_toggle =>"tooltip",
                             :data_bs_placement => "bottom",
                             :title => "Delete"%>
             <% else %>
@@ -30,7 +31,7 @@
                     <%= link_to "", unfavorite_article_path(@article),
                             :class => "bi bi-heart-fill btn btn-primary btn-danger btn-sm",
                             :style => "font-size: 1.3rem; margin-right: 5px",
-                             method: :delete,
+                             data: {turbo_method: :delete},
                             :data_bs_toggle =>"tooltip",
                             :data_bs_placement => "bottom",
                             :title => "Unfavorite"%>
@@ -38,7 +39,7 @@
                   <%= link_to "", favorite_article_path(@article),
                             :class => "bi bi-heart btn btn-primary btn-sm",
                             :style => "font-size: 1.3rem; margin-right: 5px",
-                            method: :put,
+                            data: {turbo_method: :put},
                             :data_bs_toggle =>"tooltip",
                             :data_bs_placement => "bottom",
                             :title => "Favorite"%>
@@ -90,23 +91,23 @@
                 <%= link_to ' ' + @article.likes.count.to_s, like_article_path( :id => @article.id),
                             :class => "btn btn-sm bi bi-hand-thumbs-up",
                             :style => "font-size: 1.3rem",
-                            :method => :put %>
+                            data: {turbo_method: :put} %>
             <% else %>
                 <%= link_to ' ' + @article.likes.count.to_s, like_article_path( :id => @article.id),
                             :class => "btn btn-sm bi bi-hand-thumbs-up-fill",
                             :style => "font-size: 1.3rem",
-                            :method => :put %>
+                            data: {turbo_method: :put}  %>
             <% end %>
             <% if current_user.nil? || @article.disliked?(current_user) === false %>
                 <%= link_to ' ' + @article.dislikes.count.to_s, dislike_article_url(:id => @article.id),
                             :class => "btn btn-sm bi bi-hand-thumbs-down",
                             :style => "font-size: 1.3rem",
-                            :method => :put %>
+                            data: {turbo_method: :put}  %>
             <% else %>
                 <%= link_to ' ' + @article.dislikes.count.to_s, dislike_article_url(:id => @article.id),
                             :class => "btn btn-sm bi bi-hand-thumbs-down-fill",
                             :style => "font-size: 1.3rem",
-                            :method => :put %>
+                            data: {turbo_method: :put}  %>
             <% end %>
         </div>
     </div>

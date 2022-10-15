@@ -2,12 +2,12 @@ class Article < ApplicationRecord
     include Visible
     belongs_to :user, optional: true
     has_many :comments, dependent: :destroy
-    has_many :user_articles
+    has_many :user_articles, dependent: :destroy
     has_many :favorited, through: :user_articles, source: :user
 
     has_one_attached :cover
-    has_many :likes
-    has_many :dislikes  
+    has_many :likes, dependent: :destroy
+    has_many :dislikes, dependent: :destroy 
 
     validates :title, presence: true, length: { maximum: 40, too_long: "may not exceed %{count} characters" }
     validates :body, presence: true, length: { minimum: 10, too_short: "must contain atleast %{count} characters", maximum: 500 , too_long: "may not exceed %{count} characters"}

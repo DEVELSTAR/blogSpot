@@ -5,8 +5,8 @@ class Comment < ApplicationRecord
   belongs_to :user, optional: true
 
   has_many :replies, dependent: :destroy, class_name: "Comment", foreign_key: "subject_id"
-  has_many :likes
-  has_many :dislikes
+  has_many :likes, dependent: :destroy
+  has_many :dislikes, dependent: :destroy
 
   validates :body, presence: true, length: { minimum: 1, too_short: "must contain atleast %{count} characters", maximum: 200 , too_long: "may not exceed %{count} characters"}
 
