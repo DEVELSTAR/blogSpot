@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
     include Visible
     belongs_to :user, optional: true
-    has_many :comments
+    has_many :comments, dependent: :destroy
     has_many :user_articles
     has_many :favorited, through: :user_articles, source: :user
 

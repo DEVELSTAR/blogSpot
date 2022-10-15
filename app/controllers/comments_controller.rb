@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
 
         @comment.destroy
     end
-        redirect_to article_path(@article)
+        redirect_to article_path(@article), status: :see_other
   end
 
   def update

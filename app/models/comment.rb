@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   belongs_to :subject, class_name: "Comment", optional: true
   belongs_to :user, optional: true
 
-  has_many :replies, class_name: "Comment", foreign_key: "subject_id"
+  has_many :replies, dependent: :destroy, class_name: "Comment", foreign_key: "subject_id"
   has_many :likes
   has_many :dislikes
 
