@@ -30,6 +30,8 @@ class ArticlesController < ApplicationController
   def favorite
     @article = Article.find(params[:id])
     UserArticle.create(user_id: current_user.id, article_id: @article.id)
+    redirect_to @article, status: :see_other
+
   end
 
   def unfavorite
@@ -38,6 +40,7 @@ class ArticlesController < ApplicationController
     @favorite.each do |fave|
       fave.destroy
     end
+    redirect_to @article, status: :see_other
   end
   
   def index(sorting = :id)
