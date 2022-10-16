@@ -1,9 +1,10 @@
-<div class="list-group-item d-flex flex-row align-items-center py-2 my-1 position-relative">    <% if user != current_user && current_user != nil %>
+<div class="list-group-item d-flex flex-row align-items-center py-2 my-1 position-relative">    
+    <% if user != current_user && current_user != nil %>
         <% if user.followed?(current_user) %>
             <%= link_to ' Unfollow', unfollow_user_url(:id => user.id),
                     :class => "bi bi-dash btn btn-danger end-0 pe-3 position-absolute",
                     :style => "margin-right: 5px",
-                    data: {:turbo_method => :put},
+                    data: {:turbo_method => :delete},
                     "data-bs-toggle" => "tooltip",
                     "data-bs-placement" =>"bottom",
                     :title => "Unfollow" %>
